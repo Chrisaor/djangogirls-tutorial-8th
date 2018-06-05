@@ -18,3 +18,15 @@ def post_detail(request, post_id):
         'post': post,
     }
     return render(request, 'blog/post_detail.html', context)
+
+def post_create(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        text = request.POST.get('text')
+        id = request.user
+        post = Post.objects.create(author=id, title=title,text=text)
+
+        return HttpResponse(f'id:{post.id} title:{post.title} text:{post.text}')
+        # return render(request, 'blog/post_create.html', context)
+    else:
+        return render(request, 'blog/post_create.html')

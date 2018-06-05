@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p><input type="text" name="title" class="form-control" placeholder="제목을 입력하세요"></p>
+    <p><textarea name="text" id="" cols="60" rows="10" class="form-control" placeholder="내용을 입력하세요"></textarea></p>
+    <p><button class="btn btn-primary">글 작성하기</button></p>
+</form>
+{% endblock %}
