@@ -5,7 +5,7 @@
     <div class="card mb-4">
         <div class="card-body">
             <p>published: {{ post.published_date }}</p>
-            <a href="{{ post.id }}"><h2 class="card-title">[{{ post.id }}] {{ post.title }}</h2></a>
+            <a href="{% url 'post-detail' post.id %}"><h2 class="card-title">[{{ post.id }}] {{ post.title }}</h2></a>
             <p class="card-text">{{ post.text|linebreaksbr|truncatechars:300 }}</p>
         </div>
     </div>
