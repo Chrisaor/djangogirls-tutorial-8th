@@ -42,6 +42,23 @@ def post_delete(request, post_id):
 
 def post_edit(request, post_id):
     if request.method == 'POST':
+        # 글을 수정하기
+        # 1. 수정할 내용 title, text를 가져옴
+        # 2. 수정할 Post 인스턴스를 명시
+
+        title = request.POST['title']
+        text = request.POST['text']
         post = Post.objects.get(id=post_id)
+
+        # 3. 해당하는 Post인스턴스의 title, text를 수정해서 DB에 저장
+        post.title = title
+        post.text = text
         post.save()
-    return render(request,'blog/post_edit')
+        # 4. post_detail로 이동
+        return redirect('post-detail', post_id)
+    else:
+        obj = Post.objects.get(id=post_id)
+        ctx = {
+            'post':obj,
+        }
+        return render(request,'blog/post_edit.html',ctx)

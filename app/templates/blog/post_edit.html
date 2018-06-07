@@ -3,8 +3,8 @@
 
 <form action="" method="post">
     {% csrf_token %}
-    <p><input type="text" name="title" class="form-control" placeholder="제목을 입력하세요"></p>
-    <p><textarea name="text" id="" cols="60" rows="10" class="form-control" placeholder="내용을 입력하세요"></textarea></p>
-    <p><button class="btn btn-primary">글 작성하기</button></p>
+    <p><input type="text" name="title" class="form-control" placeholder="제목을 입력하세요" value="{{ post.title }}"></p>
+    <p><textarea name="text" id="" cols="60" rows="10" class="form-control" placeholder="내용을 입력하세요">{{ post.text }}</textarea></p>
+    <p><button class="btn btn-primary">글 수정하기</button></p>
 </form>
 {% endblock %}
