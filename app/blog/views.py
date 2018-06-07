@@ -21,13 +21,27 @@ def post_detail(request, post_id):
 
 def post_create(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        text = request.POST.get('text')
-        id = request.user
-        post = Post.objects.create(author=id, title=title,text=text)
+        post = Post.objects.create(
+            author=request.user,
+            title=request.POST['title'],
+            text=request.POST['text']
+        )
 
         # return HttpResponse(f'id:{post.id} title:{post.title} text:{post.text}')
         # return render(request, 'blog/post_create.html', context)
         return redirect('post-list')
     else:
         return render(request, 'blog/post_create.html')
+
+def post_delete(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        post.delete()
+    return redirect('post-list')
+
+
+def post_edit(request, post_id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=post_id)
+        post.save()
+    return render(request,'blog/post_edit')

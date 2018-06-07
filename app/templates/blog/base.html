@@ -1,23 +1,36 @@
 {% load static %}
+<!--html:5[tab]-->
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My First Blog</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>My First Blog</title>
+	{% comment %}
+
+		{% static '경로' %}는
+		settings.py의 STATICFILES_DIRS에 포함된 경로를 기반으로 파일의 URL을 리턴해준다
+
+		{% static %}태그를 쓰려면 템플릿 상단에 {% load static %}이 필요
+
+	{% endcomment %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body>
-<div class="container">
-    <a href="{% url 'post-list' %}"><h1 class="mt-4">DjangoGirls Blog</h1></a>
+	<div class="container">
+		<!--
+		아래 텍스트를 클릭 시 무조건
+		post_list view function에 해당하는 페이지로 이동
+		-->
+		<h1 class="mt-4 mb-0"><a href="{% url 'post-list' %}">DjangoGirls Blog</a></h1>
+		<div class="text-right mb-2">
+			<a class="btn btn-primary" href="{% url 'post-create' %}">글 쓰기</a>
+		</div>
 
-    <div class="text-right mb-3">
-        <a href="{% url 'post-create' %}"><button class="btn btn-primary">글 쓰기</button></a>
-    </div>
-    {% block content %}
-    {% endblock %}
-</div>
+		{% block content %}
+		{% endblock %}
+	</div>
 </body>
 </html>
